@@ -15,7 +15,9 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "vue": "^3.4.0"
+    "axios": "^1.6.8",
+    "vue": "^3.4.0",
+    "vue-axios": "^3.5.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.9.0",

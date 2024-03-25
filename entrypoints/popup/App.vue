@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import HelloWorld from '@/components/HelloWorld.vue';
+import HotList from '@/components/HotList.vue';
 </script>
 
 <template>
   <div w-600px h-full min-h-800px>
-    <HelloWorld msg="test unocss" />
+    <HotList />
   </div>
 </template>
 
