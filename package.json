@@ -18,8 +18,11 @@
     "vue": "^3.4.0"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.9.0",
     "@vitejs/plugin-vue": "^5.0.1",
+    "eslint": "^8.57.0",
     "typescript": "^5.3.3",
+    "unplugin-auto-import": "^0.17.5",
     "vue-tsc": "^2.0.6",
     "wxt": "^0.17.0"
   }
