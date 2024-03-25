@@ -15,7 +15,6 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "axios": "^1.6.8",
     "vue": "^3.4.0",
     "vue-axios": "^3.5.2"
   },
