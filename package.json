@@ -1,34 +1,24 @@
 {
-  "name": "wxt-starter",
-  "description": "manifest.json description",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "hot-search-cli",
+  "version": "1.0.0",
+  "description": "热搜查询命令行工具",
+  "main": "src/index.js",
+  "bin": {
+    "hot-search": "src/index.js"
+  },
   "scripts": {
-    "dev": "wxt",
-    "dev:firefox": "wxt -b firefox",
-    "build": "wxt build",
-    "build:firefox": "wxt build -b firefox",
-    "zip": "wxt zip",
-    "zip:firefox": "wxt zip -b firefox",
-    "compile": "vue-tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "search": "node src/index.js"
   },
+  "keywords": ["热搜", "命令行工具"],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "vue": "^3.4.0",
-    "vue-axios": "^3.5.2"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^2.9.0",
-    "@iconify-json/logos": "^1.1.39",
-    "@iconify/json": "^2.2.147",
-    "@unocss/reset": "^0.58.0",
-    "@vitejs/plugin-vue": "^5.0.1",
-    "eslint": "^8.57.0",
-    "typescript": "^5.3.3",
-    "unocss": "^0.58.6",
-    "unplugin-auto-import": "^0.17.5",
-    "vue-tsc": "^2.0.6",
-    "wxt": "^0.17.0"
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10",
+    "commander": "^8.0.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "inquirer": "^8.2.0",
+    "open": "^8.4.0"
   }
-}
+} 
