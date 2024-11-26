@@ -5,22 +5,24 @@ const inquirer = require('inquirer');
 const open = require('open');
 const ora = require('ora');
 const chalk = require('chalk');
-const { getDouyin } = require('./platforms/douyin');
-const { getWeibo } = require('./platforms/weibo');
-const { getTencent } = require('./platforms/tencent');
-const { getBaidu } = require('./platforms/baidu');
-const { getBilibili } = require('./platforms/bilibili');
-const { get36Kr } = require('./platforms/36kr');
-const { getZhihu } = require('./platforms/zhihu');
-const { getIthome } = require('./platforms/ithome');
-const { getSspai } = require('./platforms/sspai');
-const { getThepaper } = require('./platforms/thepaper');
-const { getDouban } = require('./platforms/douban');
-const { getJuejin } = require('./platforms/juejin');
-const { getNetease } = require('./platforms/netease');
-const { getWeread } = require('./platforms/weread');
-const { getHellogithub } = require('./platforms/hellogithub');
-const { getJianshu } = require('./platforms/jianshu');
+const {ResourceUtil} = require("./common/resource-util");
+const {Resources} = require("./resources");
+// const { getDouyin } = require('./platforms/douyin');
+// const { getWeibo } = require('./platforms/weibo');
+// const { getTencent } = require('./platforms/tencent');
+// const { getBaidu } = require('./platforms/baidu');
+// const { getBilibili } = require('./platforms/bilibili');
+// const { get36Kr } = require('./platforms/36kr');
+// const { getZhihu } = require('./platforms/zhihu');
+// const { getIthome } = require('./platforms/ithome');
+// const { getSspai } = require('./platforms/sspai');
+// const { getThepaper } = require('./platforms/thepaper');
+// const { getDouban } = require('./platforms/douban');
+// const { getJuejin } = require('./platforms/juejin');
+// const { getNetease } = require('./platforms/netease');
+// const { getWeread } = require('./platforms/weread');
+// const { getHellogithub } = require('./platforms/hellogithub');
+// const { getJianshu } = require('./platforms/jianshu');
 
 const platforms = {
   'all': '所有平台',
@@ -177,10 +179,12 @@ async function fetchData(platform) {
 async function main() {
   console.log(chalk.cyan('热搜聚合工具'));
   console.log(chalk.gray('请输入数字选择要查看的平台:'));
-  
-  const choices = Object.entries(platforms).map(([key, value], index) => ({
-    name: `${value}`,
-    value: key
+  ResourceUtil.init(Resources);
+
+  const list =[{name:"所有平台", type: 'all'},ResourceUtil.getAllResourceTypeList()]
+  const choices = list.map((item, index) => ({
+    name: item.name,
+    value: item
   }));
 
   const answer = await inquirer.prompt([
@@ -192,9 +196,7 @@ async function main() {
       pageSize: choices.length
     }
   ]);
-
-  await fetchData(answer.platform);
-  
+  const finals = await ResourceUtil.getResourceItem(answer)
   // 询问是否继续查看其他平台
   const { continue: shouldContinue } = await inquirer.prompt([
     {
