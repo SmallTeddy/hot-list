@@ -35,7 +35,7 @@
 
 ## 界面截图
 
-![search](./assets/search.png.png)
+![search](./assets/search.png)
 
 ## 环境要求
 
