@@ -1,28 +1,22 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const axios = require("axios");
 
 async function getBaidu() {
   try {
-    const response = await axios.get('http://top.baidu.com/buzz?b=1', {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      }
-    });
-    const $ = cheerio.load(response.data);
-    const hotList = [];
-
-    $('.list-table .keyword').each((i, elem) => {
-      hotList.push({
-        title: $(elem).text().trim(),
-        hot: $(elem).next('.last').text().trim()
-      });
-    });
-
-    return hotList;
+    const response = await axios.get(
+      "https://api-hot.imsyy.top/baidu?cache=true"
+    );
+    if (response.data && response.data.data) {
+      return response.data.data.map((item) => ({
+        title: item.title,
+        hot: item.hot || "热度未知",
+        url: item.url || item.link || "",
+      }));
+    }
+    return [];
   } catch (error) {
-    console.error('百度热搜获取失败：', error);
+    console.error("百度热搜获取失败：", error);
     return [];
   }
 }
 
-module.exports = { getBaidu }; 
+module.exports = { getBaidu };

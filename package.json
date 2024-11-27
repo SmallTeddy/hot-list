@@ -7,7 +7,7 @@
     "hot-search": "src/index.js"
   },
   "scripts": {
-    "search": "node src/index.js"
+    "search": "bun run ./src/index.js"
   },
   "keywords": ["热搜", "命令行工具"],
   "author": "",
