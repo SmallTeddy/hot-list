@@ -26,7 +26,7 @@ export class ResourceUtil {
 
     /**
      * 获取单个资源
-     * @param item
+     * @param item { name: string, description: string, type: string, params: any }
      * @returns {Promise<void>}
      */
     static async getResourceItem(item) {

@@ -181,7 +181,7 @@ async function main() {
   console.log(chalk.gray('请输入数字选择要查看的平台:'));
   ResourceUtil.init(Resources);
 
-  const list = [{ name: "所有平台", type: 'all' }, ResourceUtil.getAllResourceTypeList()]
+  const list = [{ name: "所有平台", type: 'all' }, ...ResourceUtil.getAllResourceTypeList()]
   const choices = list.map((item, index) => ({
     name: item.name,
     value: item
