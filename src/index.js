@@ -24,22 +24,22 @@ const { getJianshu } = require("./platforms/jianshu");
 
 const platforms = {
   all: "所有平台",
-  douyin: "抖音热搜",
   weibo: "微博热搜",
-  tencent: "腾讯新闻",
   baidu: "百度热搜",
-  bilibili: "B站热搜",
-  "36kr": "36氪热搜",
   zhihu: "知乎热搜",
-  ithome: "IT之家热榜",
-  sspai: "少数派热榜",
-  thepaper: "澎湃新闻",
-  douban: "豆瓣电影",
   juejin: "掘金热榜",
-  netease: "网易新闻",
-  weread: "微信读书",
   hellogithub: "HelloGitHub",
+  douyin: "抖音热搜",
+  tencent: "腾讯新闻",
+  bilibili: "B站热搜",
+  sspai: "少数派热榜",
+  netease: "网易新闻",
+  thepaper: "澎湃新闻",
   jianshu: "简书热榜",
+  ithome: "IT之家热榜",
+  "36kr": "36氪热搜",
+  douban: "豆瓣电影",
+  weread: "微信读书",
 };
 
 async function showHotList(items, platformName) {
