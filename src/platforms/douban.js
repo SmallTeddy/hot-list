@@ -9,6 +9,7 @@ async function getDouban() {
       return response.data.data.map((item) => ({
         title: item.title,
         hot: item.hot || "热度未知",
+        url: item.url || item.link || "",
       }));
     }
     return [];

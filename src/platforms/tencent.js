@@ -17,6 +17,7 @@ async function getTencent() {
       return response.data.idlist[0].newslist.slice(1, 51).map((item) => ({
         title: item.title,
         hot: item.hotScore || "热度未知",
+        url: item.url || item.link || "",
       }));
     }
 
