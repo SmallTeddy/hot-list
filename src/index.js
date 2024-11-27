@@ -196,7 +196,7 @@ async function main() {
       pageSize: choices.length
     }
   ]);
-  const finals = await ResourceUtil.getResourceItem(answer)
+  const finals = await ResourceUtil.getResource(answer)
   // 询问是否继续查看其他平台
   const { continue: shouldContinue } = await inquirer.prompt([
     {
