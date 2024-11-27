@@ -31,25 +31,30 @@ export class ResourceUtil {
      */
     static async getResourceItem(item) {
         const replacementReg = /\$\{([^}]+)\}/g;
-        const { baseUrl, method, headers, resourceTransformer, list } = this.resources[item.from];
-        const { params } = item;
+        const {baseUrl, method, headers, resourceTransformer, list} = ResourceUtil.resources[item.from];
+        const {params} = item;
         let match;
         let url = baseUrl;
         while ((match = replacementReg.exec(baseUrl)) !== null) {
-            console.log("提取内容:", match[1]);
             const key = match[1];
             url = url.replace('${' + key + '}', item[key])
         }
-        const response = await ResourceUtil.fetch(url, { method, headers, params })
+        const response = await ResourceUtil.fetch(url, {method, headers, params})
         return resourceTransformer ? resourceTransformer(response) : response
     }
 
     /**
      * 获取全部存在的源
-     * @returns {Promise<void>}
+     * 返回对象
      */
     static async getAllResources() {
-
+        const result = await Promise.allSettled(ResourceUtil.getAllResourceTypeList().map(async (item) => {
+            const list = await ResourceUtil.getResourceItem(item)
+            return {
+                [item.name]: list
+            }
+        }))
+        return result.reduce((acc, cur) => Object.assign(acc, cur['value']), {});
     }
 
     static getGetParams(params) {
@@ -58,9 +63,9 @@ export class ResourceUtil {
 
     static async fetch(url, config, callback, error) {
         try {
-            const { method, headers, params } = config;
+            const {method, headers, params} = config;
             if (method === 'POST') {
-                return await axios.post(url, params, { headers }).then(response => {
+                return await axios.post(url, params, {headers}).then(response => {
                     callback?.(response);
                     return response;
                 });
@@ -68,7 +73,7 @@ export class ResourceUtil {
                 if (params) {
                     url += url.includes('?') ? '&' + ResourceUtil.getGetParams(params) : '?' + ResourceUtil.getGetParams(params);
                 }
-                return await axios.get(url, { headers }).then(response => {
+                return await axios.get(url, {headers}).then(response => {
                     callback?.(response);
                     return response;
                 });
@@ -84,7 +89,7 @@ export class ResourceUtil {
      */
     static getAllResourceTypeList() {
         return Object.keys(ResourceUtil.resources).reduce((list, key) => {
-            return list.concat(ResourceUtil.resources[key].list.map(o => Object.assign(o, { from: key })));
+            return list.concat(ResourceUtil.resources[key].list.map(o => Object.assign(o, {from: key})));
         }, [])
     }
 }

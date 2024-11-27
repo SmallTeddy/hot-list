@@ -76,7 +76,7 @@ export const Resources = {
                 params: {}
             },
             {
-                name: '36氪热搜',
+                name: '36氪',
                 description: '',
                 type: '36kr',
                 params: {}
