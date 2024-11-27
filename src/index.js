@@ -162,7 +162,7 @@ async function fetchData(platform) {
       let result = [];
       let platformName = platforms[platform];
 
-      if (platformName === "weibo") {
+      if (platform === "weibo") {
         result = await getWeibo();
       } else {
         switch (platform) {
@@ -216,6 +216,7 @@ async function fetchData(platform) {
             return;
         }
       }
+      
       spinner.succeed("获取成功！");
       await showHotList(result, platformName);
     }
