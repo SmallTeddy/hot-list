@@ -162,60 +162,60 @@ async function fetchData(platform) {
       let result = [];
       let platformName = platforms[platform];
 
-      switch (platform) {
-        case "douyin":
-          result = await getDouyin();
-          break;
-        case "weibo":
-          result = await getWeibo();
-          break;
-        case "tencent":
-          result = await getTencent();
-          break;
-        case "baidu":
-          result = await getBaidu();
-          break;
-        case "bilibili":
-          result = await getBilibili();
-          break;
-        case "36kr":
-          result = await get36Kr();
-          break;
-        case "zhihu":
-          result = await getZhihu();
-          break;
-        case "ithome":
-          result = await getIthome();
-          break;
-        case "sspai":
-          result = await getSspai();
-          break;
-        case "thepaper":
-          result = await getThepaper();
-          break;
-        case "douban":
-          result = await getDouban();
-          break;
-        case "juejin":
-          result = await getJuejin();
-          break;
-        case "netease":
-          result = await getNetease();
-          break;
-        case "weread":
-          result = await getWeread();
-          break;
-        case "hellogithub":
-          result = await getHellogithub();
-          break;
-        case "jianshu":
-          result = await getJianshu();
-          break;
-        default:
-          spinner.fail("未知的平台!");
-          return;
+      if (platformName === "weibo") {
+        result = await getWeibo();
+      } else {
+        switch (platform) {
+          case "douyin":
+            result = await getDouyin();
+            break;
+          case "tencent":
+            result = await getTencent();
+            break;
+          case "baidu":
+            result = await getBaidu();
+            break;
+          case "bilibili":
+            result = await getBilibili();
+            break;
+          case "36kr":
+            result = await get36Kr();
+            break;
+          case "zhihu":
+            result = await getZhihu();
+            break;
+          case "ithome":
+            result = await getIthome();
+            break;
+          case "sspai":
+            result = await getSspai();
+            break;
+          case "thepaper":
+            result = await getThepaper();
+            break;
+          case "douban":
+            result = await getDouban();
+            break;
+          case "juejin":
+            result = await getJuejin();
+            break;
+          case "netease":
+            result = await getNetease();
+            break;
+          case "weread":
+            result = await getWeread();
+            break;
+          case "hellogithub":
+            result = await getHellogithub();
+            break;
+          case "jianshu":
+            result = await getJianshu();
+            break;
+          default:
+            spinner.fail("未知的平台!");
+            return;
+        }
       }
-
       spinner.succeed("获取成功！");
       await showHotList(result, platformName);
     }
