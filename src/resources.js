@@ -34,7 +34,7 @@ export const Resources = {
         baseUrl: 'https://api-hot.imsyy.top/${type}?cache=true',
         method: 'GET',
         headers: {},
-        resourceTransformer: (response)=>{
+        resourceTransformer: (response) => {
             if (response.data && response.data.data) {
                 return response.data.data.map(item => ({
                     title: item.title,
@@ -52,5 +52,4 @@ export const Resources = {
             }
         ]
     }
-
 }

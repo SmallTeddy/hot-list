@@ -5,8 +5,8 @@ const inquirer = require('inquirer');
 const open = require('open');
 const ora = require('ora');
 const chalk = require('chalk');
-const {ResourceUtil} = require("./common/resource-util");
-const {Resources} = require("./resources");
+const { ResourceUtil } = require("./common/resource-util");
+const { Resources } = require("./resources");
 // const { getDouyin } = require('./platforms/douyin');
 // const { getWeibo } = require('./platforms/weibo');
 // const { getTencent } = require('./platforms/tencent');
@@ -97,7 +97,7 @@ async function fetchData(platform) {
   const spinner = ora('正在获取热搜数据...').start();
   try {
     let data = [];
-    
+
     if (platform === 'all') {
       const results = await Promise.all([
         getDouyin(),
@@ -117,12 +117,12 @@ async function fetchData(platform) {
         getHellogithub(),
         getJianshu()
       ]);
-      
+
       spinner.succeed('获取成功！');
 
-      const platformNames = ['抖音热搜', '微博热搜', '腾讯新闻', '百度热搜', 'B站热搜', '36氪热搜', 
-                           '知乎热搜', 'IT之家热榜', '少数派热榜', '澎湃新闻', '豆瓣电影', '掘金热榜',
-                           '网易新闻', '微信读书', 'HelloGitHub', '简书热榜'];
+      const platformNames = ['抖音热搜', '微博热搜', '腾讯新闻', '百度热搜', 'B站热搜', '36氪热搜',
+        '知乎热搜', 'IT之家热榜', '少数派热榜', '澎湃新闻', '豆瓣电影', '掘金热榜',
+        '网易新闻', '微信读书', 'HelloGitHub', '简书热榜'];
 
       // 展示所有平台数据的选择列表
       const allPlatformChoices = platformNames.map((name, index) => ({
@@ -144,8 +144,8 @@ async function fetchData(platform) {
     } else {
       let result = [];
       let platformName = platforms[platform];
-      
-      switch(platform) {
+
+      switch (platform) {
         case 'douyin': result = await getDouyin(); break;
         case 'weibo': result = await getWeibo(); break;
         case 'tencent': result = await getTencent(); break;
@@ -166,7 +166,7 @@ async function fetchData(platform) {
           spinner.fail('未知的平台!');
           return;
       }
-      
+
       spinner.succeed('获取成功！');
       await showHotList(result, platformName);
     }
@@ -181,7 +181,7 @@ async function main() {
   console.log(chalk.gray('请输入数字选择要查看的平台:'));
   ResourceUtil.init(Resources);
 
-  const list =[{name:"所有平台", type: 'all'},ResourceUtil.getAllResourceTypeList()]
+  const list = [{ name: "所有平台", type: 'all' }, ResourceUtil.getAllResourceTypeList()]
   const choices = list.map((item, index) => ({
     name: item.name,
     value: item
